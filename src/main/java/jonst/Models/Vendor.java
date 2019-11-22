@@ -218,7 +218,7 @@ public void addToPurchaseList(Product product){
     @Override
     public String getDescription(String productCode) {
         for (Product prod : productList) {
-            if (prod.getId().equals(productCode)) {
+            if (prod.getId().toLowerCase().equals(productCode.toLowerCase())) {
                 return prod.getDescription();
             }
         }

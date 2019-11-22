@@ -13,12 +13,12 @@ public class Chem extends Product {
 
     @Override
     public String getDescription(){
-        String description = "";
+        StringBuilder description = new StringBuilder();
 
-        description.concat(name + "("+id+"): " + price + " dollars. ");
+        description.append("("+id+") " + name + ": "  + price + " dollars. ");
 
-        description.concat(effect + " for " + duration + " minutes.");
+        description.append(effect + " for " + duration + " minutes.");
 
-        return description;
+        return description.toString();
     }
 }

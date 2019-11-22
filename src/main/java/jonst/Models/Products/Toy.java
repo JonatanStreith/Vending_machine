@@ -10,12 +10,12 @@ public class Toy extends Product {
 
     @Override
     public String getDescription(){
-        String description = "";
+        StringBuilder description = new StringBuilder();
 
-        description.concat(name + "("+id+"): " + price + " dollars. ");
+        description.append("("+id+") " + name + ": "  + price + " dollars. ");
 
-        description.concat("Intended for ages " + ageAndUp + " and up.");
+        description.append("Intended for ages " + ageAndUp + " and up.");
 
-        return description;
+        return description.toString();
     }
 }

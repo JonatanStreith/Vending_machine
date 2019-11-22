@@ -14,37 +14,37 @@ public abstract class Edible extends Product {
 
     @Override
     public String getDescription(){
-        String description = "";
+        StringBuilder description = new StringBuilder();
 
-        description.concat(name + "("+id+"): " + price + " dollars. " + calories + " calories. ");
+        description.append("("+id+") " + name + ": "  + price + " dollars. " + calories + " calories. ");
         for (String entry: dietaryWarnings) {
             if(entry.equals("sugar"))
-                description.concat("Contains sugar. ");
+                description.append("Contains sugar. ");
             if(entry.equals("gluten"))
-                description.concat("Contains gluten. ");
+                description.append("Contains gluten. ");
             if(entry.equals("nuts"))
-                description.concat("May contain nuts. ");
+                description.append("May contain nuts. ");
             if(entry.equals("lactose"))
-                description.concat("Contains lactose. ");
+                description.append("Contains lactose. ");
             if(entry.equals("caffeine"))
-                description.concat("Contains caffeine. ");
+                description.append("Contains caffeine. ");
             if(entry.equals("radiation"))
-                description.concat("Radioactive. ");
+                description.append("Radioactive. ");
             if(entry.equals("alcohol"))
-                description.concat("Alcoholic beverage. ");
+                description.append("Alcoholic beverage. ");
             if(entry.equals("meat"))
-                description.concat("Contains meat. ");
+                description.append("Contains meat. ");
             if(entry.equals("human flesh"))
-                description.concat("Made of human flesh. ");
+                description.append("Made of human flesh. ");
             if(entry.equals("hallucinatory"))
-                description.concat("May cause hallucinations. ");
+                description.append("May cause hallucinations. ");
             if(entry.equals("hot"))
-                description.concat("Contents may be hot. ");
+                description.append("Contents may be hot. ");
         }
 
-        description.concat(type + ".");
+        description.append(type + ".");
 
-        return description;
+        return description.toString();
     }
 
 }
