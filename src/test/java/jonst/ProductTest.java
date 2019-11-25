@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class ProductTest {
+public class ProductTest {      //Tests all Product-inheriting classes for working constructors and methods
 
     Product[] manualArray;
 
@@ -35,6 +35,22 @@ public class ProductTest {
     }
 
     @Test
+    public void GettersTest() {
+
+
+        String name = manualArray[3].getName();
+        String id = manualArray[3].getId();
+        int price = manualArray[3].getPrice();
+
+
+
+        assertEquals("Pineapple", name);
+        assertEquals("pi", id);
+        assertEquals(25, price);
+
+    }
+
+    @Test
     public void displayTest() {
 
 
@@ -49,11 +65,10 @@ public class ProductTest {
     public void descriptionTest() {
 
 
-        String description = manualArray[3].getDescription();
-        String expected = "(pi) Pineapple: 25 dollars. 500 calories. Contains sugar. Tropical.";
 
-
-        assertEquals(expected, description);
+        assertEquals("(pi) Pineapple: 25 dollars. 500 calories. Contains sugar. Tropical.", manualArray[3].getDescription());
+        assertEquals("(fs) Fidget spinner: 45 dollars. Intended for ages 5 and up.", manualArray[5].getDescription());
+        assertEquals("(pl) Placebo: 500 dollars. Nothing! for 5 minutes.", manualArray[1].getDescription());
 
     }
 

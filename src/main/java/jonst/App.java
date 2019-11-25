@@ -11,5 +11,8 @@ public class App
     public static void main( String[] args )
     {
         Vendor newVendor = new Vendor();
+
+        newVendor.runVendor();
+
     }
 }

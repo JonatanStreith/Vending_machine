@@ -18,14 +18,22 @@ public class Vendor implements VendingMachine {
 
     public Vendor() {
 
-        vendorActive = true;
-
-        inputReader = new Scanner(System.in);
-
-        System.out.println("Welcome to Wasteland Wendor! Your outlet for affordable post-apocalyptic commodities!\n");
 
         productList = ProductList.getProductList();     //Get the list of products
         purchaseList = new Product[0];
+
+
+
+    }
+
+    public void runVendor(){
+
+
+        inputReader = new Scanner(System.in);
+        vendorActive = true;
+
+
+        System.out.println("Welcome to Wasteland Wendor! Your outlet for affordable post-apocalyptic commodities!\n");
 
         while (vendorActive) {
 
@@ -37,7 +45,6 @@ public class Vendor implements VendingMachine {
             handleResponse(choice);     //Process the choice
 
         }
-
         inputReader.close();
     }
 
@@ -114,7 +121,16 @@ public class Vendor implements VendingMachine {
     }
 
     public void returnDeposit() {
-        int returningMoney = depositPool;
+
+        String returnsLine = getReturnsLine(depositPool);
+
+        System.out.println(returnsLine);
+
+        depositPool = 0;
+    }
+
+    public String getReturnsLine(int deposit){
+
         int[] moneyArray = new int[8];
 
         StringBuilder outputLine = new StringBuilder("You receive ");
@@ -122,37 +138,36 @@ public class Vendor implements VendingMachine {
 
         for (int i = LegalTender.values().length - 1; i >= 0; i--) {
             int denomination = Integer.parseInt(LegalTender.values()[i].getValue());    //Get the denomination of the current bill
-            int numberOfBills = (int) Math.floor(returningMoney / denomination);         //Count how many full bills we can get out of the depositPool
+            int numberOfBills = (int) Math.floor(deposit / denomination);         //Count how many full bills we can get out of the depositPool
             moneyArray[i] = numberOfBills;                                              //Add the bills to the correct place in the array
-            returningMoney -= (numberOfBills * denomination);                           //Adjust depositPool to account for removed money
+            deposit -= (numberOfBills * denomination);                           //Adjust depositPool to account for removed money
 
 
-
-                if (numberOfBills > 0) {
-                    outputLine.append(numberOfBills + " " + denomination + " dollar " + (numberOfBills > 1 ? "bills, " : "bill, "));
-                }
+            if (numberOfBills > 0) {
+                outputLine.append(numberOfBills + " " + denomination + " dollar " + (numberOfBills > 1 ? "bills, " : "bill, "));
+            }
 
         }
 
-        System.out.println(outputLine.toString());
+        return outputLine.toString();
 
-        depositPool = 0;
     }
 
-    public void listPurchases(){
+
+    public void listPurchases() {
         System.out.println("You have purchased:");
 
-        for (Product purchase: purchaseList) {
+        for (Product purchase : purchaseList) {
             System.out.println(purchase.getName());
         }
 
     }
 
 
-public void addToPurchaseList(Product product){
-        purchaseList = Arrays.copyOf(purchaseList, purchaseList.length+1);
-        purchaseList[purchaseList.length-1] = product;
-}
+    public void addToPurchaseList(Product product) {
+        purchaseList = Arrays.copyOf(purchaseList, purchaseList.length + 1);
+        purchaseList[purchaseList.length - 1] = product;
+    }
 
     public void purchase(String productCode) {
         Product currentPurchase = request(productCode);
@@ -242,4 +257,35 @@ public void addToPurchaseList(Product product){
 
         return returnArray;
     }
+
+
+//-----Getters and setters
+
+
+    //Kinda don't want to have these, but they're needed for testing
+
+    public void setDepositPool(int depositPool) {
+        this.depositPool = depositPool;
+    }
+
+    public Product[] getProductList() {
+        return productList;
+    }
+
+
+    public Product[] getPurchaseList() {
+        return purchaseList;
+    }
+
+
+    public boolean isVendorActive() {
+        return vendorActive;
+    }
+
+    public void setVendorActive(boolean vendorActive) {
+        this.vendorActive = vendorActive;
+    }
+
+
+
 }
